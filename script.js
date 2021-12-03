@@ -43,11 +43,7 @@ const displayController = (() => {
     const restartButton = document.getElementById('restart-button');
 
     restartButton.addEventListener('click', (e) => {
-        // restart game
-        gameBoard.resetGrid();
-        gameController.reset();
-        renderGameBoard();
-        updatePlayerText(`Player ${gameController.getCurrentPlayerSign()}'s turn to play`)
+        gameController.resetGame();
     })
 
     Array.from(gridItems).forEach(item => {
@@ -79,7 +75,7 @@ const displayController = (() => {
         playerText.textContent = message;
     };
 
-    return {setPlayerTextMessage, updatePlayerText};
+    return {setPlayerTextMessage, updatePlayerText, renderGameBoard};
 })();
 
 const gameController = (() => {
@@ -88,6 +84,10 @@ const gameController = (() => {
 
     let isOver = false;
     let round = 1;
+
+    const getCurrentPlayerSign = () => {
+        return (round % 2 === 0) ? playerO.getSign() : playerX.getSign();
+    };
 
     const isGameOver = () => {
         return isOver;
@@ -109,18 +109,27 @@ const gameController = (() => {
         displayController.updatePlayerText(`Player ${getCurrentPlayerSign()}'s turn to play`);
     };
 
-    const getCurrentPlayerSign = () => {
-        return (round % 2 === 0) ? playerO.getSign() : playerX.getSign();
-    };
 
     const checkWinner = () => {
         // TODO
     };
 
-    const reset = () => {
+    const resetController = () => {
         isOver = false;
         round = 1;
     }
-    return {isGameOver, performTurn, getCurrentPlayerSign, reset};
+
+    const resetGame = () => {
+        gameBoard.resetGrid();
+        resetController();
+        displayController.renderGameBoard();
+        displayController.updatePlayerText(`Player ${getCurrentPlayerSign()}'s turn to play`);
+    }
+
+    if (round == 1) {
+        resetGame();
+    };
+
+    return {isGameOver, performTurn, getCurrentPlayerSign, resetGame};
 })();
 
