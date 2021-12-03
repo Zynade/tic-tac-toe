@@ -20,7 +20,7 @@ margin: 0 15px;
 }
 
 .header {
-    height: 15vh;
+    height: 13vh;
     font-size: 4.5rem;
     background-color: rgb(153, 217, 140);
     display: flex;
@@ -76,5 +76,5 @@ margin: 0 15px;
     justify-content: center;
     align-items: center;
     background-color: rgb(217, 237, 146);
-    padding: 10px;
+    padding: 11.75px;
 }
