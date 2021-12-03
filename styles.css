@@ -57,6 +57,10 @@ margin: 0 15px;
     border: 2px solid rgb(82, 182, 154);
 }
 
+.grid-item:hover {
+    background-color: rgb(188, 240, 240);
+}
+
 .restart-button-container {
     margin-top: 4.5vh;
     display: flex;
@@ -69,6 +73,10 @@ margin: 0 15px;
     width: 100px;
     padding: 20px;
     border-radius: 10px;
+}
+
+.restart-button:hover {
+    background-color: rgb(93, 206, 71);
 }
 
 .footer {
