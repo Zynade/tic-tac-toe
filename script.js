@@ -4,7 +4,7 @@ const Player = (sign) => {
         return sign;
     };
 
-    return {getSign};
+    return { getSign };
 };
 
 const gameBoard = (() => {
@@ -34,13 +34,13 @@ const gameBoard = (() => {
         }
     }
 
-    return {getGridItem, setGridItem, resetGrid};
+    return { getGridItem, setGridItem, resetGrid };
 })();
 
 const displayController = (() => {
-    const playerText = document.getElementById('player-text');
+    const playerText = document.querySelector('#player-text');
     const gridItems = document.querySelectorAll('.grid-item');
-    const restartButton = document.getElementById('restart-button');
+    const restartButton = document.querySelector('#restart-button');
 
     restartButton.addEventListener('click', (e) => {
         gameController.resetGame();
@@ -75,7 +75,7 @@ const displayController = (() => {
         playerText.textContent = message;
     };
 
-    return {setPlayerTextMessage, updatePlayerText, renderGameBoard};
+    return { setPlayerTextMessage, updatePlayerText, renderGameBoard };
 })();
 
 const gameController = (() => {
@@ -95,23 +95,43 @@ const gameController = (() => {
 
     const performTurn = (index) => {
         gameBoard.setGridItem(index, getCurrentPlayerSign());
-        if (checkWinner()) {
+        if (checkWinner(getCurrentPlayerSign())) {
+            console.log(`Congrats, Player ${getCurrentPlayerSign()}! You win.`);
             displayController.setPlayerTextMessage(getCurrentPlayerSign());
             isOver = true;
-            return
+            return;
         }
         if (round === 9) {
             displayController.setPlayerTextMessage('draw');
             isOver = true;
-            return
+            return;
         }
         round++;
         displayController.updatePlayerText(`Player ${getCurrentPlayerSign()}'s turn to play`);
     };
 
 
-    const checkWinner = () => {
-        // TODO
+    const checkWinner = (sign) => {
+        const winningAxes = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6],
+        ];
+        let gameOver = false;
+        winningAxes.forEach((item, index) => {
+            if (gameBoard.getGridItem(item[0]) === sign && gameBoard.getGridItem(item[1]) === sign &&
+                gameBoard.getGridItem(item[2]) === sign) {
+                    gameOver = true;
+            }
+
+        });
+
+        if (gameOver) return true;
     };
 
     const resetController = () => {
@@ -130,6 +150,6 @@ const gameController = (() => {
         resetGame();
     };
 
-    return {isGameOver, performTurn, getCurrentPlayerSign, resetGame};
+    return { isGameOver, performTurn, getCurrentPlayerSign, resetGame };
 })();
 
