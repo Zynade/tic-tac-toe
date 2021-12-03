@@ -48,7 +48,6 @@ const displayController = (() => {
 
     Array.from(gridItems).forEach(item => {
         item.addEventListener('click', (e) => {
-            // stuff
             if (e.target.textContent === "" && !gameController.isGameOver()) {
                 gameController.performTurn(parseInt(e.target.dataset.index))
                 renderGameBoard();
@@ -110,7 +109,6 @@ const gameController = (() => {
         displayController.updatePlayerText(`Player ${getCurrentPlayerSign()}'s turn to play`);
     };
 
-
     const checkWinner = (sign) => {
         const winningAxes = [
             [0, 1, 2],
@@ -126,7 +124,7 @@ const gameController = (() => {
         winningAxes.forEach((item, index) => {
             if (gameBoard.getGridItem(item[0]) === sign && gameBoard.getGridItem(item[1]) === sign &&
                 gameBoard.getGridItem(item[2]) === sign) {
-                    gameOver = true;
+                gameOver = true;
             }
 
         });
@@ -152,4 +150,3 @@ const gameController = (() => {
 
     return { isGameOver, performTurn, getCurrentPlayerSign, resetGame };
 })();
-
