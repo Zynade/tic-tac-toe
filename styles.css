@@ -20,7 +20,7 @@ margin: 0 15px;
 }
 
 .header {
-    height: 13vh;
+    height: 12vh;
     font-size: 4.5rem;
     background-color: rgb(153, 217, 140);
     display: flex;
@@ -42,8 +42,8 @@ margin: 0 15px;
 
 .gameboard {
     background-color: rgb(253, 252, 220);
-    height: 55vh;
-    width: 55vh;
+    height: 50vh;
+    width: 50vh;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -76,5 +76,5 @@ margin: 0 15px;
     justify-content: center;
     align-items: center;
     background-color: rgb(217, 237, 146);
-    padding: 11.75px;
+    padding: 15px;
 }
